@@ -16,6 +16,7 @@ namespace Dexterity.Login
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            //// TODO: Add AddMvc(options => { options.Filters.Add(new RequireHttpsAttribute()) });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -25,6 +26,8 @@ namespace Dexterity.Login
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //// TODO: Add app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44343));
 
             app.UseMvcWithDefaultRoute();
         }
