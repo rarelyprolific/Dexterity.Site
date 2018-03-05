@@ -1,9 +1,16 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model Dexterity.Login.Models.LoginInputModel
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Login Page</title>
 </head>
 <body>
-    <form>
+    @if (!ViewContext.ModelState.IsValid)
+    {
+        <div asp-validation-summary="All"></div>
+    }
+
+    <form asp-action="Login">
         Username: <input type="text" asp-for="Username" /><br/>
         Password: <input type="password" asp-for="Password" /><br/>
         <input type="submit" value="Log in" />

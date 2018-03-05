@@ -17,6 +17,13 @@ namespace Dexterity.Site
         {
             services.AddMvc();
             //// TODO: Add AddMvc(options => { options.Filters.Add(new RequireHttpsAttribute()) });
+
+            //// TODO: Local login example: services.AddAuthentication(options => {
+            ////                                               options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthencticationScheme
+            ////                                               options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme
+            ////                                               options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme
+            ////                                               })
+            ////                                    .AddCookies(options => { options.LoginPath = "/auth/signin"; });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,6 +35,8 @@ namespace Dexterity.Site
             }
 
             //// TODO: Add app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44343));
+
+            //// TODO: UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
         }
