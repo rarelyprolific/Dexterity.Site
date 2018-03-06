@@ -41,6 +41,7 @@ namespace Dexterity.Site
                 options.Authority = "http://localhost:64831";
                 options.ClientId = "Dexterity.Site";
                 options.SaveTokens = true;
+                options.RequireHttpsMetadata = false;    //// TODO: Switch on HTTPS!
             })
             .AddCookie();
         }

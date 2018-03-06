@@ -28,8 +28,24 @@ namespace Dexterity.Auth.Configuration
                 {
                     ClientId = "Dexterity.Site",
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    RedirectUris = { "https://localhost:64826/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string> { "https://localhost:64826/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:64826/signin-oidc" },
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:64826/signout-callback-oidc" },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+                new Client
+                {
+                    ClientId = "Dexterity.Login",
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    RedirectUris = { "http://localhost:64833/signin-oidc" },
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:64833/signout-callback-oidc" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
