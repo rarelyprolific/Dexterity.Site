@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Dexterity.Auth.Configuration
+namespace Dexterity.Login.Configuration
 {
     public static class IdentityServerConfiguration
     {
