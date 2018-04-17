@@ -11,6 +11,8 @@
     }
 
     <form asp-action="Login">
+        <input type="hidden" asp-for="ReturnUrl" />
+
         Username: <input type="text" asp-for="Username" /><br/>
         Password: <input type="password" asp-for="Password" /><br/>
         <input type="submit" value="Log in" />

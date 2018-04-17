@@ -29,23 +29,8 @@ namespace Dexterity.Login.Configuration
                     ClientId = "Dexterity.Site",
                     AllowedGrantTypes = GrantTypes.Implicit,
                     RedirectUris = { "http://localhost:64826/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:64826/signout-callback-oidc" },
-                    AllowedScopes = new List<string>
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
-                    }
-                },
-                new Client
-                {
-                    ClientId = "Dexterity.Login",
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    RedirectUris = { "http://localhost:64833/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:64833/signout-callback-oidc" },
+                    //PostLogoutRedirectUris = new List<string> { "http://localhost:64826/signout-callback-oidc" },
+                    RequireConsent = false,
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
@@ -61,7 +46,7 @@ namespace Dexterity.Login.Configuration
             {
                 new TestUser
                 {
-                    SubjectId = "1",
+                    SubjectId = "12345",
                     Username = "zikes",
                     Password = "password",
                     Claims = new []

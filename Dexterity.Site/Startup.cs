@@ -38,7 +38,7 @@ namespace Dexterity.Site
             })
             .AddOpenIdConnect(options =>
             {
-                options.Authority = "http://localhost:64831";
+                options.Authority = "http://localhost:64833";
                 options.ClientId = "Dexterity.Site";
                 options.SaveTokens = true;
                 options.RequireHttpsMetadata = false;    //// TODO: Switch on HTTPS!

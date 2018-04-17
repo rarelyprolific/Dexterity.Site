@@ -13,6 +13,8 @@ namespace Dexterity.Site.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            var user = User;
+
             return View();
         }
     }

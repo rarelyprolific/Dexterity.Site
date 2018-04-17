@@ -1,7 +1,11 @@
-﻿using Dexterity.Login.Models;
+﻿using Dexterity.Login.Configuration;
+using Dexterity.Login.Models;
+using IdentityServer4.Services;
+using IdentityServer4.Test;
 //using IdentityModel;
 //using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using System;
@@ -14,8 +18,19 @@ namespace Dexterity.Login.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly TestUserStore users;
+        private readonly IIdentityServerInteractionService interaction;
+
+        public AccountController(
+            IIdentityServerInteractionService interaction,
+            TestUserStore user = null)
+        {
+            this.interaction = interaction;
+            this.users = users ?? new TestUserStore(IdentityServerConfiguration.GetUsers());
+        }
+
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
             return View();
         }
@@ -26,6 +41,16 @@ namespace Dexterity.Login.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (users.ValidateCredentials(model.Username, model.Password))
+                {
+                    var user = users.FindByUsername(model.Username);
+
+                    AuthenticationProperties props = null;
+
+                    await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
+                    Redirect(model.ReturnUrl);
+                };
+
                 //var discoveryClient = new DiscoveryClient("http://localhost:64831");
                 //var doc = await discoveryClient.GetAsync();
 
