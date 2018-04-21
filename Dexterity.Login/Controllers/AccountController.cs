@@ -48,7 +48,8 @@ namespace Dexterity.Login.Controllers
                     AuthenticationProperties props = null;
 
                     await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
-                    Redirect(model.ReturnUrl);
+                    //Redirect("https://www.google.co.uk");
+                    return Redirect(model.ReturnUrl);
                 };
 
                 //var discoveryClient = new DiscoveryClient("http://localhost:64831");

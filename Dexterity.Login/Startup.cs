@@ -16,14 +16,23 @@ namespace Dexterity.Login
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddIdentityServer(options =>
-            {
-                options.UserInteraction.LoginUrl = "http://localhost:64833/Account/Login";
-            })
-            .AddDeveloperSigningCredential()
-            .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
-            .AddInMemoryClients(IdentityServerConfiguration.GetClients())
-            .AddTestUsers(IdentityServerConfiguration.GetUsers());
+            //services.AddIdentityServer(options =>
+            //{
+            //    options.UserInteraction.LoginUrl = "http://localhost:64833/Account/Login";
+            //})
+
+            //// TODO: Figure out how I should be using IdentityResources and/or ApiResources
+            ////       An IdentityResource allows you to model a scope that will return a certain set of claims
+            ////       An APIResource allows you to model access to a protected resource (typically an API)
+
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddInMemoryClients(IdentityServerConfiguration.GetClients())
+                .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
+                .AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())
+                .AddTestUsers(IdentityServerConfiguration.GetUsers());
+
+            //// TODO: Use /.well-known/openid-configuration to verify scope and claim configuration
 
             services.AddMvc();
             //// TODO: Add AddMvc(options => { options.Filters.Add(new RequireHttpsAttribute()) });
