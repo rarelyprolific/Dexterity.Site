@@ -21,7 +21,12 @@ namespace Dexterity.Site
         {
             services.AddMvc();
 
-            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+            // Clear the Microsoft claim 
+            //JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+
+            // Prevent the automagical mapping JWT claim types to ASP Identity claim types
+            // (We'll explicitly set how we want the mapping to happen in options.TokenValidationParameters below)
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
             {
@@ -33,12 +38,13 @@ namespace Dexterity.Site
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-                options.Authority = "http://localhost:64833";
-                options.RequireHttpsMetadata = false;
+                options.Authority = "http://localhost:64833"; // The host name of the identity server
+                options.RequireHttpsMetadata = false; // Remove this and serve over HTTPS in production
 
                 options.ClientId = "Dexterity.Site";
-                options.SaveTokens = true;
+                options.SaveTokens = true; // I think we'll need this to store access and refresh tokens when using Hybrid flow
 
+                // Add the scopes we want to consume in this client (we get "openid" and "profile" automatically)
                 options.Scope.Add("email");
                 options.Scope.Add("permissions");
                 options.Scope.Add("equipment");
@@ -46,7 +52,9 @@ namespace Dexterity.Site
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     // Maps the "name" claim from the JWT to User.Identity.Name
-                    NameClaimType = "name"
+                    NameClaimType = "name",
+                    // Maps the "role" claim from the JWT to user roles (e.g. User.IsInRole("Administrator")
+                    RoleClaimType = "role"
                 };
             });
 

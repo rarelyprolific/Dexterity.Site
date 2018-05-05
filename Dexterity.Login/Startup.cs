@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dexterity.Login.Configuration;
+﻿using Dexterity.Login.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace Dexterity.Login
 {
@@ -17,33 +11,13 @@ namespace Dexterity.Login
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentityServer(options =>
-            //{
-            //    options.UserInteraction.LoginUrl = "http://localhost:64833/Account/Login";
-            //})
-
-            //// TODO: Figure out how I should be using IdentityResources and/or ApiResources
-            ////       An IdentityResource allows you to model a scope that will return a certain set of claims
-            ////       An APIResource allows you to model access to a protected resource (typically an API)
+            services.AddMvc();
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                .AddInMemoryClients(ClientConfiguration.Get()) //IdentityServerConfiguration.GetClients())
-                .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())  //IdentityServerConfiguration.GetIdentityResources())
-                //.AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())
-                .AddTestUsers(TestUserConfiguration.Get());  //IdentityServerConfiguration.GetUsers());
-
-            //services.AddIdentityServer()
-            //    .AddDeveloperSigningCredential()
-            //    .AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())  // Do I need these?
-            //    .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())
-            //    .AddInMemoryClients(ClientConfiguration.Get())
-            //    .AddTestUsers(TestUserConfiguration.Get());
-
-            //// TODO: Use /.well-known/openid-configuration to verify scope and claim configuration
-
-            services.AddMvc();
-            //// TODO: Add AddMvc(options => { options.Filters.Add(new RequireHttpsAttribute()) });
+                .AddInMemoryClients(ClientConfiguration.Get())
+                .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())
+                .AddTestUsers(TestUserConfiguration.Get());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,8 +29,6 @@ namespace Dexterity.Login
             }
 
             app.UseIdentityServer();
-
-            //// TODO: Add app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44343));
 
             app.UseMvcWithDefaultRoute();
         }
