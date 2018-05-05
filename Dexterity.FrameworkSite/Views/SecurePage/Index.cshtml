@@ -6,8 +6,11 @@
     <p>This is a secure page. We should not be able to get here without logging in.</p>
 
     <div>
-        <h1>Welcome @User.Identity.Name</h1>
-        <h4>Here are your claims</h4>
+        <h1>Welcome @User.Identity.Name [User.Identity.Name]</h1>
+
+        <h4>Is an Administrator: @User.IsInRole("Administrator") [User.IsInRole("Administrator")]</h4>
+
+        @*<h4>Here are your claims</h4>
         <ul>
             @foreach (var claim in User.Claims)
             {
@@ -15,7 +18,23 @@
                     <em>@claim.Type</em>: @claim.Value
                 </li>
             }
-        </ul>
+        </ul>*@
     </div>
+
+    @*<dl>
+        <dt>id token</dt>
+        <dd>@ViewContext.HttpContext.GetTokenAsync("id_token")</dd>
+    </dl>
+
+    <dl>
+        <dt>access token</dt>
+        <dd>@ViewContext.HttpContext.GetTokenAsync("access_token")</dd>
+    </dl>
+
+    <dl>
+        <dt>refresh token</dt>
+        <dd>@ViewContext.HttpContext.GetTokenAsync("refresh_token")</dd>
+    </dl>*@
+
 </body>
 </html>

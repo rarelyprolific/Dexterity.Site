@@ -26,6 +26,24 @@ namespace Dexterity.Login.Configuration
                         "permissions",
                         "equipment"
                     }
+                },
+
+                new Client
+                {
+                    ClientId = "Dexterity.FrameworkSite",
+                    ClientName = "The Dexterity ASP.NET Framework website",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    RedirectUris = { "http://localhost:57056/signin-oidc" },
+                    PostLogoutRedirectUris = new List<string> { "http://localhost:57056" },
+                    RequireConsent = false,
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "permissions",
+                        "equipment"
+                    }
                 }
             };
         }

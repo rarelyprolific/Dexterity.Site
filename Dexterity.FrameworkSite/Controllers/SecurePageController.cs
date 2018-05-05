@@ -12,6 +12,8 @@ namespace Dexterity.FrameworkSite.Controllers
         // GET: SecurePage
         public ActionResult Index()
         {
+            var user = User;
+
             return View();
         }
     }
