@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Dexterity.Site
 {
@@ -19,30 +20,36 @@ namespace Dexterity.Site
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //// TODO: Add AddMvc(options => { options.Filters.Add(new RequireHttpsAttribute()) });
-
-            //// TODO: Local login example: services.AddAuthentication(options => {
-            ////                                               options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthencticationScheme
-            ////                                               options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme
-            ////                                               options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme
-            ////                                               })
-            ////                                    .AddCookies(options => { options.LoginPath = "/auth/signin"; });
 
             JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
             {
-                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = "oidc";
             })
-            .AddOpenIdConnect(options =>
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddOpenIdConnect("oidc", options =>
             {
-                options.Authority = "https://localhost:44383";
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                options.Authority = "http://localhost:64833";
+                options.RequireHttpsMetadata = false;
+
                 options.ClientId = "Dexterity.Site";
                 options.SaveTokens = true;
-            })
-            .AddCookie();
+
+                options.Scope.Add("email");
+                options.Scope.Add("permissions");
+                options.Scope.Add("equipment");
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    // Maps the "name" claim from the JWT to User.Identity.Name
+                    NameClaimType = "name"
+                };
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,8 +59,6 @@ namespace Dexterity.Site
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            //// TODO: Add app.UseRewriter(new RewriteOptions().AddRedirectToHttps(301, 44343));
 
             app.UseAuthentication();
 

@@ -26,7 +26,7 @@ namespace Dexterity.Login.Controllers
             TestUserStore user = null)
         {
             this.interaction = interaction;
-            this.users = users ?? new TestUserStore(IdentityServerConfiguration.GetUsers());
+            this.users = users ?? new TestUserStore(TestUserConfiguration.Get());
         }
 
         [HttpGet]
@@ -49,6 +49,7 @@ namespace Dexterity.Login.Controllers
 
                     await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
                     //Redirect("https://www.google.co.uk");
+
                     return Redirect(model.ReturnUrl);
                 };
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Dexterity.Login
 {
@@ -27,10 +28,17 @@ namespace Dexterity.Login
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                .AddInMemoryClients(IdentityServerConfiguration.GetClients())
-                .AddInMemoryIdentityResources(IdentityServerConfiguration.GetIdentityResources())
-                .AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())
-                .AddTestUsers(IdentityServerConfiguration.GetUsers());
+                .AddInMemoryClients(ClientConfiguration.Get()) //IdentityServerConfiguration.GetClients())
+                .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())  //IdentityServerConfiguration.GetIdentityResources())
+                //.AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())
+                .AddTestUsers(TestUserConfiguration.Get());  //IdentityServerConfiguration.GetUsers());
+
+            //services.AddIdentityServer()
+            //    .AddDeveloperSigningCredential()
+            //    .AddInMemoryApiResources(IdentityServerConfiguration.GetApiResources())  // Do I need these?
+            //    .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())
+            //    .AddInMemoryClients(ClientConfiguration.Get())
+            //    .AddTestUsers(TestUserConfiguration.Get());
 
             //// TODO: Use /.well-known/openid-configuration to verify scope and claim configuration
 
