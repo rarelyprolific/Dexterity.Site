@@ -14,7 +14,16 @@ namespace Dexterity.Login.Configuration
                 {
                     ClientId = "Dexterity.Site",
                     ClientName = "The Dexterity ASP.NET Core website",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+
+                    // Required to include claims in id_token when using Hybrid flow
+                    // (We should probably be using the UserInfo endpoint instead though)
+                    AlwaysIncludeUserClaimsInIdToken = true,
+
                     RedirectUris = { "http://localhost:44370/signin-oidc" },
                     PostLogoutRedirectUris = new List<string> { "http://localhost:44370" },
                     RequireConsent = false,

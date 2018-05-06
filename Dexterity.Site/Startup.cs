@@ -42,7 +42,11 @@ namespace Dexterity.Site
                 options.RequireHttpsMetadata = false; // Remove this and serve over HTTPS in production
 
                 options.ClientId = "Dexterity.Site";
+                options.ClientSecret = "secret";
                 options.SaveTokens = true; // I think we'll need this to store access and refresh tokens when using Hybrid flow
+
+                // Set response type to Hybrid flow
+                options.ResponseType = "code id_token";
 
                 // Add the scopes we want to consume in this client (we get "openid" and "profile" automatically)
                 options.Scope.Add("email");
