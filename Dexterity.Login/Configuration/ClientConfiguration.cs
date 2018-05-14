@@ -20,10 +20,6 @@ namespace Dexterity.Login.Configuration
                     },
                     AllowedGrantTypes = GrantTypes.Hybrid,
 
-                    // Required to include claims in id_token when using Hybrid flow
-                    // (We should probably be using the UserInfo endpoint instead though)
-                    AlwaysIncludeUserClaimsInIdToken = true,
-
                     RedirectUris = { "http://localhost:44370/signin-oidc" },
                     PostLogoutRedirectUris = new List<string> { "http://localhost:44370" },
                     RequireConsent = false,

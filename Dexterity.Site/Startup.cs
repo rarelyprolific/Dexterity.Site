@@ -48,6 +48,9 @@ namespace Dexterity.Site
                 // Set response type to Hybrid flow
                 options.ResponseType = "code id_token";
 
+                // Causes the client to make a request to the userinfo endpoint instead of expecting claims to be in the id_token
+                options.GetClaimsFromUserInfoEndpoint = true;
+
                 // Add the scopes we want to consume in this client (we get "openid" and "profile" automatically)
                 options.Scope.Add("email");
                 options.Scope.Add("permissions");
