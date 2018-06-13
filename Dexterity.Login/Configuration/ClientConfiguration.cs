@@ -22,6 +22,10 @@ namespace Dexterity.Login.Configuration
 
                     RedirectUris = { "http://localhost:44370/signin-oidc" },
                     PostLogoutRedirectUris = new List<string> { "http://localhost:44370" },
+
+                    // Set the lifetime of the identity token to 5 seconds
+                    IdentityTokenLifetime = 5,
+
                     RequireConsent = false,
                     AllowedScopes = new List<string>
                     {

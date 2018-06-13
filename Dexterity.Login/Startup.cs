@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Dexterity.Login
 {
@@ -13,7 +14,11 @@ namespace Dexterity.Login
         {
             services.AddMvc();
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+            {
+                // Set the lifetime of the authentication cookie to 5 seconds
+                options.Authentication.CookieLifetime = TimeSpan.FromSeconds(5);
+            })
                 .AddDeveloperSigningCredential()
                 .AddInMemoryClients(ClientConfiguration.Get())
                 .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())

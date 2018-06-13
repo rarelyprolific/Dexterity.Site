@@ -51,6 +51,9 @@ namespace Dexterity.Site
                 // Causes the client to make a request to the userinfo endpoint instead of expecting claims to be in the id_token
                 options.GetClaimsFromUserInfoEndpoint = true;
 
+                // Ensure the ASP.NET authentication session life matches that of the authentication token issued by Identity Server
+                options.UseTokenLifetime = true;
+
                 // Add the scopes we want to consume in this client (we get "openid" and "profile" automatically)
                 options.Scope.Add("email");
                 options.Scope.Add("permissions");
