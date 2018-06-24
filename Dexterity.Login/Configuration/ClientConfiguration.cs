@@ -20,8 +20,8 @@ namespace Dexterity.Login.Configuration
                     },
                     AllowedGrantTypes = GrantTypes.Hybrid,
 
-                    RedirectUris = { "http://localhost:44370/signin-oidc" },
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:44370" },
+                    RedirectUris = { "https://localhost:44363/site/signin-oidc" },
+                    PostLogoutRedirectUris = new List<string> { "https://localhost:44363/site" },
 
                     // Set the lifetime of the identity token to 5 seconds
                     IdentityTokenLifetime = 5,

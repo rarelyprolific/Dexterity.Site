@@ -38,8 +38,7 @@ namespace Dexterity.Site
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-                options.Authority = "http://localhost:64833"; // The host name of the identity server
-                options.RequireHttpsMetadata = false; // Remove this and serve over HTTPS in production
+                options.Authority = "https://localhost:44387/login"; // The host name of the identity server
 
                 options.ClientId = "Dexterity.Site";
                 options.ClientSecret = "secret";

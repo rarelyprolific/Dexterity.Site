@@ -2,9 +2,13 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:44370/",
+    "iis": {
+      "applicationUrl": "http://localhost/Dexterity.Site",
       "sslPort": 0
+    },
+    "iisExpress": {
+      "applicationUrl": "https://localhost:44363/site/",
+      "sslPort": 44363
     }
   },
   "profiles": {
