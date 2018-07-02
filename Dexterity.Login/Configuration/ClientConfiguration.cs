@@ -1,6 +1,8 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Dexterity.Login.Configuration
 {
@@ -52,6 +54,31 @@ namespace Dexterity.Login.Configuration
                         IdentityServerConstants.StandardScopes.Email,
                         "permissions",
                         "equipment"
+                    }
+                },
+
+                new Client
+                {
+                    ClientId = "Dexterity.AutoThenticator",
+                    ClientName = "The Dexterity Desktop Test Application",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
+                    ClientSecrets =
+                    {
+                        new Secret("autothen".ToSha256())
+                    },
+                    AlwaysSendClientClaims = true,
+                    Claims = new List<Claim>
+                    {
+                        new Claim("email", "just something random here")
+                    },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "permissions",
+                        "equipment",
+                        "api1scope"
                     }
                 }
             };

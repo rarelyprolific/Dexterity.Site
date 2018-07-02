@@ -22,6 +22,7 @@ namespace Dexterity.Login
                 .AddDeveloperSigningCredential()
                 .AddInMemoryClients(ClientConfiguration.Get())
                 .AddInMemoryIdentityResources(IdentityResourceConfiguration.Get())
+                .AddInMemoryApiResources(ApiResourceConfiguration.Get())
                 .AddTestUsers(TestUserConfiguration.Get());
         }
 

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dexterity.Login", "Dexterit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dexterity.FrameworkSite", "Dexterity.FrameworkSite\Dexterity.FrameworkSite.csproj", "{35F858A4-F57C-42C9-A0B7-CAAD575A9F49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dexterity.AutoThenticatorApp", "Dexterity.AutoThenticatorApp\Dexterity.AutoThenticatorApp.csproj", "{C9EBCEFA-1BCE-4915-B6A2-F3DE6B6ED67C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{35F858A4-F57C-42C9-A0B7-CAAD575A9F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35F858A4-F57C-42C9-A0B7-CAAD575A9F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35F858A4-F57C-42C9-A0B7-CAAD575A9F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9EBCEFA-1BCE-4915-B6A2-F3DE6B6ED67C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9EBCEFA-1BCE-4915-B6A2-F3DE6B6ED67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9EBCEFA-1BCE-4915-B6A2-F3DE6B6ED67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9EBCEFA-1BCE-4915-B6A2-F3DE6B6ED67C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
